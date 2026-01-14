@@ -13,7 +13,8 @@ namespace ChessConsole
         static void Main(string[] args)
         {
             Posicao posicao = new(2,6);
-            Console.WriteLine(posicao);
+
+            Tabuleiro.Tabuleiro tabuleiro = new(8,8);
         }
     }
 }
