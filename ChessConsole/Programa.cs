@@ -15,6 +15,7 @@ namespace ChessConsole
             Posicao posicao = new(2,6);
 
             Tabuleiro.Tabuleiro tabuleiro = new(8,8);
+            Tela.ImprimirTabuleiro(tabuleiro);
         }
     }
 }
