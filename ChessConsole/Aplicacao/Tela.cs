@@ -16,9 +16,9 @@ namespace Aplicacao
             {
                 for(int j = 0; j < tabuleiro.Colunas; j++)
                 {
-                    if(tabuleiro.Pecas[i,j] != null)
+                    if(tabuleiro.ObterPecaPorPosicao(i,j) != null)
                     {
-                        Console.Write(tabuleiro.Pecas[i,j] + " ");
+                        Console.Write(tabuleiro.ObterPecaPorPosicao(i,j) + " ");
                     } else
                     {
                         Console.Write("-" + " ");
