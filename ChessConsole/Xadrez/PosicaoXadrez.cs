@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tabuleiro;
 
-namespace ChessConsole.Xadrez
+namespace Xadrez
 {
     public class PosicaoXadrez
     {

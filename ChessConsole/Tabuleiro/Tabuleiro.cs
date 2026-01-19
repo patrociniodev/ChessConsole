@@ -36,7 +36,7 @@ namespace Tabuleiro
             return ObterPecaPorPosicao(pos) != null;
         }
 
-        public void ColocarPeca(Peca p,Posicao pos)
+        public void ColocarPeca(Peca p,Posicao pos) 
         {
             if(ExistePeca(pos))
             {

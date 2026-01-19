@@ -1,5 +1,4 @@
-﻿using ChessConsole.Xadrez;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -23,12 +22,11 @@ namespace Aplicacao
 
                 tab.ColocarPeca(new Torre(Cor.PRETA,tab),new Posicao(0,0));
                 tab.ColocarPeca(new Torre(Cor.PRETA,tab),new Posicao(1,3));
-                tab.ColocarPeca(new Rei(Cor.PRETA,tab),new Posicao(2,4));
+                tab.ColocarPeca(new Rei(Cor.PRETA,tab),new Posicao(0,2));
+
+                tab.ColocarPeca(new Torre(Cor.BRANCA, tab), new Posicao(3, 5));
 
                 Tela.ImprimirTabuleiro(tab);
-
-                PosicaoXadrez posicaoXadrez = new PosicaoXadrez('a',1);
-                Console.WriteLine(posicaoXadrez.ToPosicao());
             } catch(TabuleiroException e)
             {
                 Console.WriteLine($"Ocorreu um erro: {e.Message}");
