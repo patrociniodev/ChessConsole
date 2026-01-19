@@ -7,28 +7,30 @@ using System.Threading.Tasks;
 using Tabuleiro;
 using Xadrez;
 
-namespace Aplicacao
-{
-    public class Programa
-    {
-        static void Main(string[] args)
-        {
+namespace Aplicacao {
+    public class Programa {
+        static void Main(string[] args) {
 
-            try
-            {
-                Posicao posicao = new(2,6);
+            try {
+                PartidaDeXadrez partida = new PartidaDeXadrez();
 
-                Tabuleiro.Tabuleiro tab = new(8,8);
+                while (!partida.Terminada) {
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(partida.Tabuleiro);
 
-                tab.ColocarPeca(new Torre(Cor.PRETA,tab),new Posicao(0,0));
-                tab.ColocarPeca(new Torre(Cor.PRETA,tab),new Posicao(1,3));
-                tab.ColocarPeca(new Rei(Cor.PRETA,tab),new Posicao(0,2));
+                    Console.WriteLine();
+                    Console.WriteLine();
 
-                tab.ColocarPeca(new Torre(Cor.BRANCA, tab), new Posicao(3, 5));
+                    Console.Write("Posição de origem: ");
+                    Posicao posicaoOrigem = Tela.LerPosicaoXadrez().ToPosicao();
 
-                Tela.ImprimirTabuleiro(tab);
-            } catch(TabuleiroException e)
-            {
+                    Console.Write("Posição de destino: ");
+                    Posicao posicaoDestino = Tela.LerPosicaoXadrez().ToPosicao();
+
+                    partida.ExecutarMovimento(posicaoOrigem, posicaoDestino);
+                }
+            }
+            catch (TabuleiroException e) {
                 Console.WriteLine($"Ocorreu um erro: {e.Message}");
             }
         }
