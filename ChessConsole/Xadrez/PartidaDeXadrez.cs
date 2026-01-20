@@ -75,8 +75,16 @@ public class PartidaDeXadrez
             Xeque = false;
         }
 
-        Turno++;
-        MudarJogadorDaVez();
+        if (EstaEmXequeMate(CorAdversaria(JogadorDaVez)))
+        {
+            Terminada = true;
+        }
+        else
+        {
+            Turno++;
+            MudarJogadorDaVez();
+        }
+
 
     }
 
@@ -132,19 +140,25 @@ public class PartidaDeXadrez
 
     private void ColocarPecas()
     {
-        ColocarNovaPeca('c', 2, new Torre(Cor.Branca, Tabuleiro));
-        ColocarNovaPeca('d', 2, new Torre(Cor.Branca, Tabuleiro));
-        ColocarNovaPeca('e', 2, new Torre(Cor.Branca, Tabuleiro));
-        ColocarNovaPeca('e', 1, new Torre(Cor.Branca, Tabuleiro));
-        ColocarNovaPeca('d', 1, new Rei(Cor.Branca, Tabuleiro));
-        ColocarNovaPeca('c', 1, new Torre(Cor.Branca, Tabuleiro));
+        //ColocarNovaPeca('c', 2, new Torre(Cor.Branca, Tabuleiro));
+        //ColocarNovaPeca('d', 2, new Torre(Cor.Branca, Tabuleiro));
+        //ColocarNovaPeca('e', 2, new Torre(Cor.Branca, Tabuleiro));
+        //ColocarNovaPeca('e', 1, new Torre(Cor.Branca, Tabuleiro));
+        //ColocarNovaPeca('d', 1, new Rei(Cor.Branca, Tabuleiro));
+        //ColocarNovaPeca('c', 1, new Torre(Cor.Branca, Tabuleiro));
 
-        ColocarNovaPeca('c', 8, new Torre(Cor.Preta, Tabuleiro));
-        ColocarNovaPeca('c', 7, new Torre(Cor.Preta, Tabuleiro));
-        ColocarNovaPeca('d', 7, new Torre(Cor.Preta, Tabuleiro));
-        ColocarNovaPeca('g', 8, new Torre(Cor.Preta, Tabuleiro));
-        ColocarNovaPeca('e', 8, new Torre(Cor.Preta, Tabuleiro));
-        ColocarNovaPeca('d', 8, new Rei(Cor.Preta, Tabuleiro));
+        //ColocarNovaPeca('c', 8, new Torre(Cor.Preta, Tabuleiro));
+        //ColocarNovaPeca('c', 7, new Torre(Cor.Preta, Tabuleiro));
+        //ColocarNovaPeca('d', 7, new Torre(Cor.Preta, Tabuleiro));
+        //ColocarNovaPeca('g', 8, new Torre(Cor.Preta, Tabuleiro));
+        //ColocarNovaPeca('e', 8, new Torre(Cor.Preta, Tabuleiro));
+        //ColocarNovaPeca('d', 8, new Rei(Cor.Preta, Tabuleiro));
+
+        ColocarNovaPeca('c', 1, new Torre(Cor.Branca, Tabuleiro));
+        ColocarNovaPeca('d', 1, new Rei(Cor.Branca, Tabuleiro));
+        ColocarNovaPeca('h', 7, new Torre(Cor.Branca, Tabuleiro));
+        ColocarNovaPeca('a', 8, new Rei(Cor.Preta, Tabuleiro));
+        ColocarNovaPeca('b', 8, new Torre(Cor.Preta, Tabuleiro));
     }
 
     private Cor CorAdversaria(Cor cor)
@@ -155,9 +169,9 @@ public class PartidaDeXadrez
     private Peca Rei(Cor cor)
     {
         var pecas = PecasEmJogoFiltradasPorCor(cor);
-        foreach(Peca p in pecas)
+        foreach (Peca p in pecas)
         {
-            if(p is Rei)
+            if (p is Rei)
             {
                 return p;
             }
@@ -166,9 +180,9 @@ public class PartidaDeXadrez
         return null;
     }
 
-    private bool EstaEmXeque(Cor cor)
+    public bool EstaEmXeque(Cor cor)
     {
-        Rei r = (Rei) Rei(cor);
+        Rei r = (Rei)Rei(cor);
 
         foreach (Peca p in PecasEmJogoFiltradasPorCor(CorAdversaria(cor)))
         {
@@ -180,5 +194,39 @@ public class PartidaDeXadrez
         }
 
         return false;
+    }
+
+    public bool EstaEmXequeMate(Cor cor)
+    {
+        if (!EstaEmXeque(cor))
+        {
+            return false;
+        }
+
+        foreach (Peca p in PecasEmJogoFiltradasPorCor(cor))
+        {
+            bool[,] movimentos = p.MovimentosPossiveis();
+            for (int i = 0; i < Tabuleiro.Linhas; i++)
+            {
+                for (int j = 0; j < Tabuleiro.Colunas; j++)
+                {
+                    if (movimentos[i, j])
+                    {
+                        Posicao origem = p.Posicao;
+                        Posicao destino = new Posicao(i, j);
+                        Peca pecaCapturada = ExecutarMovimentoNoTabuleiro(origem, destino);
+
+                        bool aindaEstaEmXeque = EstaEmXeque(cor);
+                        DesfazerMovimentoNoTabuleiro(origem, destino, pecaCapturada);
+                        if (!aindaEstaEmXeque)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 }

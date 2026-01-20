@@ -23,10 +23,18 @@ namespace Aplicacao
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine($"Turno: {partida.Turno}");
-            Console.WriteLine($"Aguardando jogada: {partida.JogadorDaVez.ToString()}");
-            if(partida.Xeque)
+
+            if (!partida.Terminada)
             {
-                Console.WriteLine("XEQUE!");
+                Console.WriteLine($"Aguardando jogada: {partida.JogadorDaVez.ToString()}");
+                if (partida.Xeque)
+                {
+                    Console.WriteLine("\nXEQUE!");
+                }
+            } else
+            {
+                Console.WriteLine("\nXEQUE MATE!");
+                Console.Write($"Vencedor: {partida.JogadorDaVez.ToString()}");
             }
         }
 
