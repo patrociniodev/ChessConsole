@@ -19,49 +19,49 @@ namespace Xadrez {
 
             //Verifica se está livre na posição acima
             pos.DefinirValoresPosicao(this.Posicao.Linha - 1, this.Posicao.Coluna);
-            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos)) {
+            if (Tabuleiro.IsPosicaoValida(pos) && this.IsMovimentoPossivel(pos)) {
                 matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
             }
 
             //Verifica se está livre na posição à nordeste
             pos.DefinirValoresPosicao(this.Posicao.Linha - 1, this.Posicao.Coluna + 1);
-            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos)) {
+            if (Tabuleiro.IsPosicaoValida(pos) && this.IsMovimentoPossivel(pos)) {
                 matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
             }
 
             //Verifica se está livre na posição à direita
             pos.DefinirValoresPosicao(this.Posicao.Linha, this.Posicao.Coluna + 1);
-            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos)) {
+            if (Tabuleiro.IsPosicaoValida(pos) && this.IsMovimentoPossivel(pos)) {
                 matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
             }
 
             //Verifica se está livre na posição à sudeste
             pos.DefinirValoresPosicao(this.Posicao.Linha + 1, this.Posicao.Coluna + 1);
-            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos)) {
+            if (Tabuleiro.IsPosicaoValida(pos) && this.IsMovimentoPossivel(pos)) {
                 matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
             }
 
             //Verifica se está livre na posição abaixo
             pos.DefinirValoresPosicao(this.Posicao.Linha + 1, this.Posicao.Coluna);
-            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos)) {
+            if (Tabuleiro.IsPosicaoValida(pos) && this.IsMovimentoPossivel(pos)) {
                 matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
             }
 
             //Verifica se está livre na posição à sudoeste
             pos.DefinirValoresPosicao(this.Posicao.Linha + 1, this.Posicao.Coluna - 1);
-            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos)) {
+            if (Tabuleiro.IsPosicaoValida(pos) && this.IsMovimentoPossivel(pos)) {
                 matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
             }
 
             //Verifica se está livre na posição à esquerda
             pos.DefinirValoresPosicao(this.Posicao.Linha, this.Posicao.Coluna - 1);
-            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos)) {
+            if (Tabuleiro.IsPosicaoValida(pos) && this.IsMovimentoPossivel(pos)) {
                 matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
             }
 
             //Verifica se está livre na posição à noroeste
             pos.DefinirValoresPosicao(this.Posicao.Linha - 1, this.Posicao.Coluna - 1);
-            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos)) {
+            if (Tabuleiro.IsPosicaoValida(pos) && this.IsMovimentoPossivel(pos)) {
                 matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
             }
 

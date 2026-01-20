@@ -9,11 +9,11 @@ namespace Tabuleiro
 {
     public enum Cor : int
     {
-        BRANCA,
-        PRETA,
-        AZUL,
-        VERDE,
-        AMARELA,
-        VERMELHO
+        Branca,
+        Preta,
+        Azul,
+        Verde,
+        Amarela,
+        Vermelho
     }
 }

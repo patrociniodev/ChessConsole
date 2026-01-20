@@ -27,15 +27,36 @@ namespace Tabuleiro
             QtdMovimentosFeitos++;
         }
 
-        public bool PodeMover(Posicao pos)
+        public bool IsMovimentoPossivel(Posicao pos)
         {
-            Peca p = Tabuleiro.ObterPecaPorPosicao(pos);
+            Peca p = Tabuleiro.ObterPecaNaPosicao(pos);
             return p == null || p.Cor != Cor;
+        }
+
+        public bool PodeMoverPara(Posicao pos)
+        {
+            return this.MovimentosPossiveis()[pos.Linha, pos.Coluna];
+        }
+
+        public bool PossuiAlgumMovimentoPossivel()
+        {
+            for (int i = 0; i < Tabuleiro.Linhas; i++)
+            {
+                for (int j = 0; j < Tabuleiro.Colunas; j++)
+                {
+                    if (MovimentosPossiveis()[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         public bool IsPecaInimiga(Posicao pos)
         {
-            Peca p = Tabuleiro.ObterPecaPorPosicao(pos);
+            Peca p = Tabuleiro.ObterPecaNaPosicao(pos);
             return p != null && p.Cor != Cor;
         }
 

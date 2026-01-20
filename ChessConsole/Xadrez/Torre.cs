@@ -21,7 +21,7 @@ namespace Xadrez
 
             //Verifica se está livre na posição acima
             pos.DefinirValoresPosicao(this.Posicao.Linha - 1, this.Posicao.Coluna);
-            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            while (Tabuleiro.IsPosicaoValida(pos) && IsMovimentoPossivel(pos))
             {
                 matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
                 if (IsPecaInimiga(pos))
@@ -34,7 +34,7 @@ namespace Xadrez
 
             //Verifica se está livre na posição à direita
             pos.DefinirValoresPosicao(this.Posicao.Linha, this.Posicao.Coluna + 1);
-            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            while (Tabuleiro.IsPosicaoValida(pos) && IsMovimentoPossivel(pos))
             {
                 if (IsPecaInimiga(pos))
                 {
@@ -46,7 +46,7 @@ namespace Xadrez
             }
             //Verifica se está livre na posição abaixo
             pos.DefinirValoresPosicao(this.Posicao.Linha + 1, this.Posicao.Coluna);
-            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            while (Tabuleiro.IsPosicaoValida(pos) && IsMovimentoPossivel(pos))
             {
                 matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
 
@@ -58,7 +58,7 @@ namespace Xadrez
             }
             //Verifica se está livre na posição à esquerda
             pos.DefinirValoresPosicao(this.Posicao.Linha, this.Posicao.Coluna - 1);
-            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            while (Tabuleiro.IsPosicaoValida(pos) && IsMovimentoPossivel(pos))
             {
                 matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
 

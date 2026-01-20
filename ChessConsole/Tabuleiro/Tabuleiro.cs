@@ -20,12 +20,12 @@ namespace Tabuleiro
             Colunas = colunas;
             Pecas = new Peca[linhas, colunas];
         }
-        public Peca ObterPecaPorPosicao(int linha, int coluna)
+        public Peca ObterPecaNaPosicao(int linha, int coluna)
         {
             return Pecas[linha, coluna];
         }
 
-        public Peca ObterPecaPorPosicao(Posicao pos)
+        public Peca ObterPecaNaPosicao(Posicao pos)
         {
             return Pecas[pos.Linha, pos.Coluna];
         }
@@ -33,7 +33,7 @@ namespace Tabuleiro
         public bool ExistePeca(Posicao pos)
         {
             ValidarPosicao(pos);
-            return ObterPecaPorPosicao(pos) != null;
+            return ObterPecaNaPosicao(pos) != null;
         }
 
         public void ColocarPeca(Peca p, Posicao pos)
@@ -49,18 +49,18 @@ namespace Tabuleiro
 
         public Peca RetirarPeca(Posicao pos)
         {
-            if (ObterPecaPorPosicao(pos) == null)
+            if (ObterPecaNaPosicao(pos) == null)
             {
                 return null;
             }
-            Peca aux = ObterPecaPorPosicao(pos);
+            Peca aux = ObterPecaNaPosicao(pos);
             aux.Posicao = null;
             Pecas[pos.Linha, pos.Coluna] = null;
 
             return aux;
         }
 
-        public bool PosicaoValida(Posicao pos)
+        public bool IsPosicaoValida(Posicao pos)
         {
             if (pos.Linha < 0 || pos.Linha >= Linhas || pos.Coluna < 0 || pos.Coluna >= Colunas)
             {
@@ -74,7 +74,7 @@ namespace Tabuleiro
 
         public void ValidarPosicao(Posicao pos)
         {
-            if (!PosicaoValida(pos))
+            if (!IsPosicaoValida(pos))
             {
                 throw new TabuleiroException("Posição inválida!");
             }

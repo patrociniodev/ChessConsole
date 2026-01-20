@@ -19,7 +19,7 @@ namespace Aplicacao
                 Console.Write(8 - i + " ");
                 for (int j = 0; j < tabuleiro.Colunas; j++)
                 {
-                    ImprimirPeca(tabuleiro.ObterPecaPorPosicao(i, j));
+                    ImprimirPeca(tabuleiro.ObterPecaNaPosicao(i, j));
                 }
                 Console.WriteLine();
 
@@ -48,7 +48,7 @@ namespace Aplicacao
                         Console.BackgroundColor = corDeFundoOriginal;
                     }
 
-                    ImprimirPeca(tabuleiro.ObterPecaPorPosicao(i, j));
+                    ImprimirPeca(tabuleiro.ObterPecaNaPosicao(i, j));
                     Console.BackgroundColor = corDeFundoOriginal;
                 }
                 Console.WriteLine();
@@ -69,7 +69,7 @@ namespace Aplicacao
             }
             else
             {
-                if (p.Cor == Cor.BRANCA)
+                if (p.Cor == Cor.Branca)
                 {
                     Console.Write(p);
                 }
