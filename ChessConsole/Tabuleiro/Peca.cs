@@ -27,6 +27,11 @@ namespace Tabuleiro
             QtdMovimentosFeitos++;
         }
 
+        public void DecrementarQtdMovimentos()
+        {
+            QtdMovimentosFeitos--;
+        }
+
         public bool IsMovimentoPossivel(Posicao pos)
         {
             Peca p = Tabuleiro.ObterPecaNaPosicao(pos);

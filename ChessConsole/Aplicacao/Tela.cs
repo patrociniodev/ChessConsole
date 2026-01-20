@@ -11,6 +11,26 @@ namespace Aplicacao
 {
     public class Tela
     {
+
+        public static void ImprimirPartida(PartidaDeXadrez partida)
+        {
+            Tela.ImprimirTabuleiro(partida.Tabuleiro);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            ImprimirCapturadas(partida);
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine($"Turno: {partida.Turno}");
+            Console.WriteLine($"Aguardando jogada: {partida.JogadorDaVez.ToString()}");
+            if(partida.Xeque)
+            {
+                Console.WriteLine("XEQUE!");
+            }
+        }
+
+
         public static void ImprimirTabuleiro(Tabuleiro.Tabuleiro tabuleiro)
         {
             for (int i = 0; i < tabuleiro.Linhas; i++)
@@ -93,22 +113,6 @@ namespace Aplicacao
             return new PosicaoXadrez(caracterePos, numeroPos);
         }
 
-        public static void ImprimirPartida(PartidaDeXadrez partida)
-        {
-            Tela.ImprimirTabuleiro(partida.Tabuleiro);
-            Console.WriteLine();
-            Console.WriteLine();
-
-            ImprimirCapturadas(partida);
-
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine($"Turno: {partida.Turno}");
-            Console.WriteLine($"Aguardando jogada: {partida.JogadorDaVez.ToString()}");
-        }
-
-
-
         public static void ImprimirCapturadas(PartidaDeXadrez partida)
         {
             Console.WriteLine("Peças capturadas:");
@@ -129,7 +133,7 @@ namespace Aplicacao
         public static void ImprimirConjunto(HashSet<Peca> conjunto)
         {
             Console.Write("[");
-            foreach(Peca p in conjunto)
+            foreach (Peca p in conjunto)
             {
                 Console.Write(p + " ");
             }
