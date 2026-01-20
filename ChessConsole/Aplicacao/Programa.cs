@@ -7,30 +7,42 @@ using System.Threading.Tasks;
 using Tabuleiro;
 using Xadrez;
 
-namespace Aplicacao {
-    public class Programa {
-        static void Main(string[] args) {
+namespace Aplicacao
+{
+    public class Programa
+    {
+        static void Main(string[] args)
+        {
 
-            try {
+            try
+            {
                 PartidaDeXadrez partida = new PartidaDeXadrez();
 
-                while (!partida.Terminada) {
+                while (!partida.Terminada)
+                {
                     Console.Clear();
                     Tela.ImprimirTabuleiro(partida.Tabuleiro);
 
                     Console.WriteLine();
                     Console.WriteLine();
-
                     Console.Write("Posição de origem: ");
                     Posicao posicaoOrigem = Tela.LerPosicaoXadrez().ToPosicao();
 
+                    bool[,] posicoesPossiveisOrigem = partida.Tabuleiro.ObterPecaPorPosicao(posicaoOrigem).MovimentosPossiveis();
+
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(partida.Tabuleiro, posicoesPossiveisOrigem);
+
+                    Console.WriteLine();
+                    Console.WriteLine();
                     Console.Write("Posição de destino: ");
                     Posicao posicaoDestino = Tela.LerPosicaoXadrez().ToPosicao();
 
                     partida.ExecutarMovimento(posicaoOrigem, posicaoDestino);
                 }
             }
-            catch (TabuleiroException e) {
+            catch (TabuleiroException e)
+            {
                 Console.WriteLine($"Ocorreu um erro: {e.Message}");
             }
         }

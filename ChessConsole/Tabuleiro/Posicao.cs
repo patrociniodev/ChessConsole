@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Tabuleiro
 {
-    public struct Posicao
+    public class Posicao
     {
-        public int Linha;
-        public int Coluna;
+        public int Linha { get; set; }
+        public int Coluna { get; set; }
 
         public Posicao(int linha, int coluna)
         {
@@ -21,6 +21,11 @@ namespace Tabuleiro
         public override string ToString()
         {
             return $"{Linha}, {Coluna}";
+        }
+
+        public void DefinirValoresPosicao(int linha, int coluna) {
+            Linha = linha;
+            Coluna = coluna;
         }
     }
 }

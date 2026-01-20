@@ -23,7 +23,7 @@ public class PartidaDeXadrez {
 
     public void ExecutarMovimento(Posicao origem, Posicao destino) {
         Peca p = Tabuleiro.RetirarPeca(origem);
-        //p.IncrementarQtdMovimentos();
+        p.IncrementarQtdMovimentos();
 
         Peca pecaCapturada = Tabuleiro.RetirarPeca(destino);
         Tabuleiro.ColocarPeca(p, destino);
