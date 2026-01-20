@@ -23,15 +23,10 @@ namespace Aplicacao
                     try
                     {
                         Console.Clear();
-                        Tela.ImprimirTabuleiro(partida.Tabuleiro);
+                        Tela.ImprimirPartida(partida);
 
                         Console.WriteLine();
-                        Console.WriteLine();
-                        Console.WriteLine($"Turno: {partida.Turno}");
-                        Console.WriteLine($"Aguardando jogada: {partida.JogadorDaVez.ToString()}");
-
-                        Console.WriteLine();
-                        Console.Write("Posição de origem: ");
+                        Console.Write("Origem: ");
                         Posicao posicaoOrigem = Tela.LerPosicaoXadrez().ToPosicao();
                         partida.ValidarPosicaoOrigem(posicaoOrigem);
 
@@ -42,7 +37,7 @@ namespace Aplicacao
 
                         Console.WriteLine();
                         Console.WriteLine();
-                        Console.Write("Posição de destino: ");
+                        Console.Write("Destino: ");
                         Posicao posicaoDestino = Tela.LerPosicaoXadrez().ToPosicao();
                         partida.ValidarPosicaoDestino(posicaoOrigem, posicaoDestino);
 

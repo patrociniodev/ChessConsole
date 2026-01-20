@@ -92,5 +92,48 @@ namespace Aplicacao
 
             return new PosicaoXadrez(caracterePos, numeroPos);
         }
+
+        public static void ImprimirPartida(PartidaDeXadrez partida)
+        {
+            Tela.ImprimirTabuleiro(partida.Tabuleiro);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            ImprimirCapturadas(partida);
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine($"Turno: {partida.Turno}");
+            Console.WriteLine($"Aguardando jogada: {partida.JogadorDaVez.ToString()}");
+        }
+
+
+
+        public static void ImprimirCapturadas(PartidaDeXadrez partida)
+        {
+            Console.WriteLine("Peças capturadas:");
+            Console.Write("Brancas: ");
+            ImprimirConjunto(partida.PecasCapturadasFiltradasPorCor(Cor.Branca));
+
+
+            Console.WriteLine(" ");
+            Console.Write("Pretas: ");
+
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            ImprimirConjunto(partida.PecasCapturadasFiltradasPorCor(Cor.Preta));
+
+            Console.ForegroundColor = aux;
+        }
+
+        public static void ImprimirConjunto(HashSet<Peca> conjunto)
+        {
+            Console.Write("[");
+            foreach(Peca p in conjunto)
+            {
+                Console.Write(p + " ");
+            }
+            Console.Write("]");
+        }
     }
 }
