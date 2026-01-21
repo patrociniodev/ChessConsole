@@ -14,10 +14,9 @@ namespace Xadrez
         {
         }
 
-        private bool PodeMoverPara(Posicao pos)
+        public override string ToString()
         {
-            Peca p = Tabuleiro.ObterPecaNaPosicao(pos);
-            return p == null || p.Cor != Cor;
+            return "T";
         }
 
         public override bool[,] MovimentosPossiveis()
@@ -77,11 +76,6 @@ namespace Xadrez
             }
 
             return matrizPosicoesLivres;
-        }
-
-        public override string ToString()
-        {
-            return "T";
         }
     }
 }
