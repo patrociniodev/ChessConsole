@@ -22,6 +22,8 @@ namespace Tabuleiro
             QtdMovimentosFeitos = 0;
         }
 
+        public abstract bool[,] MovimentosPossiveis();
+
         public void IncrementarQtdMovimentos()
         {
             QtdMovimentosFeitos++;
@@ -35,6 +37,17 @@ namespace Tabuleiro
         public bool IsMovimentoPossivel(Posicao pos)
         {
             return this.MovimentosPossiveis()[pos.Linha, pos.Coluna];
+        }
+
+        public bool PodeMoverPara(Posicao pos)
+        {
+            Peca p = Tabuleiro.ObterPecaNaPosicao(pos);
+            return p == null || p.Cor != Cor;
+        }
+        public bool IsPecaInimiga(Posicao pos)
+        {
+            Peca p = Tabuleiro.ObterPecaNaPosicao(pos);
+            return p != null && p.Cor != Cor;
         }
 
         public bool PossuiAlgumMovimentoPossivel()
@@ -52,13 +65,5 @@ namespace Tabuleiro
 
             return false;
         }
-
-        public bool IsPecaInimiga(Posicao pos)
-        {
-            Peca p = Tabuleiro.ObterPecaNaPosicao(pos);
-            return p != null && p.Cor != Cor;
-        }
-
-        public abstract bool[,] MovimentosPossiveis();
     }
 }
