@@ -33,7 +33,7 @@ namespace Xadrez
                     break;
                 }
 
-                p.DefinirValoresPosicao(p.Linha - 1, p.Linha - 1);
+                p.DefinirValoresPosicao(p.Linha - 1, p.Coluna - 1);
             }
 
             p.DefinirValoresPosicao(Posicao.Linha - 1, Posicao.Coluna + 1);
@@ -69,7 +69,7 @@ namespace Xadrez
                     break;
                 }
 
-                p.DefinirValoresPosicao(p.Linha + 1, p.Coluna + 1);
+                p.DefinirValoresPosicao(p.Linha + 1, p.Coluna - 1);
             }
 
             return matrizPosicoesLivres;
