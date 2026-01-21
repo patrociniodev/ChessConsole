@@ -34,12 +34,6 @@ namespace Tabuleiro
 
         public bool IsMovimentoPossivel(Posicao pos)
         {
-            Peca p = Tabuleiro.ObterPecaNaPosicao(pos);
-            return p == null || p.Cor != Cor;
-        }
-
-        public bool PodeMoverPara(Posicao pos)
-        {
             return this.MovimentosPossiveis()[pos.Linha, pos.Coluna];
         }
 

@@ -14,6 +14,12 @@ namespace Xadrez
         {
         }
 
+        private bool PodeMoverPara(Posicao pos)
+        {
+            Peca p = Tabuleiro.ObterPecaNaPosicao(pos);
+            return p == null || p.Cor != Cor;
+        }
+
         public override bool[,] MovimentosPossiveis()
         {
             bool[,] matrizPosicoesLivres = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
@@ -21,7 +27,7 @@ namespace Xadrez
 
             //Verifica se está livre na posição acima
             pos.DefinirValoresPosicao(this.Posicao.Linha - 1, this.Posicao.Coluna);
-            while (Tabuleiro.IsPosicaoValida(pos) && IsMovimentoPossivel(pos))
+            while (Tabuleiro.IsPosicaoValida(pos) && PodeMoverPara(pos))
             {
                 matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
                 if (IsPecaInimiga(pos))
@@ -34,7 +40,7 @@ namespace Xadrez
 
             //Verifica se está livre na posição à direita
             pos.DefinirValoresPosicao(this.Posicao.Linha, this.Posicao.Coluna + 1);
-            while (Tabuleiro.IsPosicaoValida(pos) && IsMovimentoPossivel(pos))
+            while (Tabuleiro.IsPosicaoValida(pos) && PodeMoverPara(pos))
             {
                 if (IsPecaInimiga(pos))
                 {
@@ -46,7 +52,7 @@ namespace Xadrez
             }
             //Verifica se está livre na posição abaixo
             pos.DefinirValoresPosicao(this.Posicao.Linha + 1, this.Posicao.Coluna);
-            while (Tabuleiro.IsPosicaoValida(pos) && IsMovimentoPossivel(pos))
+            while (Tabuleiro.IsPosicaoValida(pos) && PodeMoverPara(pos))
             {
                 matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
 
@@ -58,7 +64,7 @@ namespace Xadrez
             }
             //Verifica se está livre na posição à esquerda
             pos.DefinirValoresPosicao(this.Posicao.Linha, this.Posicao.Coluna - 1);
-            while (Tabuleiro.IsPosicaoValida(pos) && IsMovimentoPossivel(pos))
+            while (Tabuleiro.IsPosicaoValida(pos) && PodeMoverPara(pos))
             {
                 matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
 
