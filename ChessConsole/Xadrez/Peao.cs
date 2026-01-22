@@ -10,9 +10,11 @@ namespace Xadrez
 {
     public class Peao : Peca
     {
-        public Peao(Cor cor,Tabuleiro.Tabuleiro tab) : base(cor,tab)
-        {
+        private PartidaDeXadrez Partida;
 
+        public Peao(Cor cor, Tabuleiro.Tabuleiro tab, PartidaDeXadrez partida) : base(cor, tab)
+        {
+            Partida = partida;
         }
         public override string ToString()
         {
@@ -24,21 +26,22 @@ namespace Xadrez
             return Tabuleiro.ObterPecaNaPosicao(pos) == null;
         }
 
-        public override bool[,] MovimentosPossiveis() {
+        public override bool[,] MovimentosPossiveis()
+        {
             bool[,] matrizPosicoesLivres = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
             Posicao pos = new Posicao(0, 0);
 
-            if(Cor == Cor.Branca)
+            if (Cor == Cor.Branca)
             {
 
                 pos.DefinirValoresPosicao(Posicao.Linha - 1, Posicao.Coluna);
-                if(Tabuleiro.IsPosicaoValida(pos) && EstaLivre(pos))
+                if (Tabuleiro.IsPosicaoValida(pos) && EstaLivre(pos))
                 {
                     matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
                 }
 
                 pos.DefinirValoresPosicao(Posicao.Linha - 2, Posicao.Coluna);
-                if(Tabuleiro.IsPosicaoValida(pos) && EstaLivre(pos) && QtdMovimentosFeitos == 0)
+                if (Tabuleiro.IsPosicaoValida(pos) && EstaLivre(pos) && QtdMovimentosFeitos == 0)
                 {
                     matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
                 }
@@ -49,10 +52,28 @@ namespace Xadrez
                     matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
                 }
 
-                pos.DefinirValoresPosicao(Posicao.Linha - 1 , Posicao.Coluna + 1);
+                pos.DefinirValoresPosicao(Posicao.Linha - 1, Posicao.Coluna + 1);
                 if (Tabuleiro.IsPosicaoValida(pos) && IsPecaInimiga(pos))
                 {
                     matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
+                }
+
+                // Jogada especial en passant para peças brancas
+                if (Posicao.Linha == 3)
+                {
+                    Posicao posicaoAEsquerda = new Posicao(Posicao.Linha, Posicao.Coluna - 1);
+                    Peca pecaAEsquerda = Tabuleiro.ObterPecaNaPosicao(posicaoAEsquerda);
+                    if (Tabuleiro.IsPosicaoValida(posicaoAEsquerda) && IsPecaInimiga(posicaoAEsquerda) && pecaAEsquerda == Partida.VulneravelEnPassant)
+                    {
+                        matrizPosicoesLivres[posicaoAEsquerda.Linha - 1, posicaoAEsquerda.Coluna] = true;
+                    }
+
+                    Posicao posicaoADireita = new Posicao(Posicao.Linha, Posicao.Coluna + 1);
+                    Peca pecaADireita = Tabuleiro.ObterPecaNaPosicao(posicaoADireita);
+                    if (Tabuleiro.IsPosicaoValida(posicaoADireita) && IsPecaInimiga(posicaoADireita) && pecaADireita == Partida.VulneravelEnPassant)
+                    {
+                        matrizPosicoesLivres[posicaoADireita.Linha - 1, posicaoADireita.Coluna] = true;
+                    }
                 }
             }
             else
@@ -79,6 +100,24 @@ namespace Xadrez
                 if (Tabuleiro.IsPosicaoValida(pos) && IsPecaInimiga(pos))
                 {
                     matrizPosicoesLivres[pos.Linha, pos.Coluna] = true;
+                }
+
+                // Jogada especial en passant para peças pretas
+                if (Posicao.Linha == 4)
+                {
+                    Posicao posicaoAEsquerda = new Posicao(Posicao.Linha, Posicao.Coluna - 1);
+                    Peca pecaAEsquerda = Tabuleiro.ObterPecaNaPosicao(posicaoAEsquerda);
+                    if (Tabuleiro.IsPosicaoValida(posicaoAEsquerda) && IsPecaInimiga(posicaoAEsquerda) && pecaAEsquerda == Partida.VulneravelEnPassant)
+                    {
+                        matrizPosicoesLivres[posicaoAEsquerda.Linha + 1, posicaoAEsquerda.Coluna] = true;
+                    }
+
+                    Posicao posicaoADireita = new Posicao(Posicao.Linha, Posicao.Coluna + 1);
+                    Peca pecaADireita = Tabuleiro.ObterPecaNaPosicao(posicaoADireita);
+                    if (Tabuleiro.IsPosicaoValida(posicaoADireita) && IsPecaInimiga(posicaoADireita) && pecaADireita == Partida.VulneravelEnPassant)
+                    {
+                        matrizPosicoesLivres[posicaoADireita.Linha + 1, posicaoADireita.Coluna] = true;
+                    }
                 }
             }
 
