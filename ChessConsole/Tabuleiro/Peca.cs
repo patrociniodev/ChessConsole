@@ -36,7 +36,14 @@ namespace Tabuleiro
 
         public bool IsMovimentoPossivel(Posicao pos)
         {
-            return this.MovimentosPossiveis()[pos.Linha, pos.Coluna];
+            try
+            {
+                return this.MovimentosPossiveis()[pos.Linha, pos.Coluna];
+            } 
+            catch(IndexOutOfRangeException e)
+            {
+                throw new TabuleiroException("A posição escolhida é inválida!");
+            }
         }
 
         public bool PodeMoverPara(Posicao pos)
